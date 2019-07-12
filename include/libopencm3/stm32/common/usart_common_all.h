@@ -108,6 +108,8 @@ void usart_enable(uint32_t usart);
 void usart_disable(uint32_t usart);
 void usart_send(uint32_t usart, uint16_t data);
 uint16_t usart_recv(uint32_t usart);
+bool usart_is_send_ready(uint32_t usart);
+bool usart_is_rxcv_ready(uint32_t usart);
 void usart_wait_send_ready(uint32_t usart);
 void usart_wait_recv_ready(uint32_t usart);
 void usart_send_blocking(uint32_t usart, uint16_t data);

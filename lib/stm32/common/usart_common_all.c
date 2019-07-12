@@ -208,6 +208,37 @@ void usart_disable(uint32_t usart)
 }
 
 /*---------------------------------------------------------------------------*/
+/** @brief USART Wait for Transmit Data Buffer Empty
+
+Blocks until the transmit data buffer becomes empty and is ready to accept the
+next data word.
+
+@param[in] usart unsigned 32 bit. USART block register address base @ref
+usart_reg_base
+*/
+
+void usart_wait_send_ready(uint32_t usart)
+{
+	/* Wait until the data has been transferred into the shift register. */
+	while (!usart_is_send_ready(usart));
+}
+
+/*---------------------------------------------------------------------------*/
+/** @brief USART Wait for Received Data Available
+
+Blocks until the receive data buffer holds a valid received data word.
+
+@param[in] usart unsigned 32 bit. USART block register address base @ref
+usart_reg_base
+*/
+
+void usart_wait_recv_ready(uint32_t usart)
+{
+	/* Wait until the data is ready to be received. */
+	while (!usart_is_rxcv_ready(usart));
+}
+
+/*---------------------------------------------------------------------------*/
 /** @brief USART Send Data Word with Blocking
 
 Blocks until the transmit data buffer becomes empty then writes the next data

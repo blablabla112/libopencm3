@@ -258,37 +258,6 @@ uint16_t usart_recv(uint32_t usart)
 }
 
 /*---------------------------------------------------------------------------*/
-/** @brief USART Wait for Transmit Data Buffer Empty
- *
- * Blocks until the transmit data buffer becomes empty and is ready to accept
- * the next data word.
- *
- * @param[in] usart unsigned 32 bit. USART block register address base @ref
- * usart_reg_base
- */
-
-void usart_wait_send_ready(uint32_t usart)
-{
-	/* Wait until the data has been transferred into the shift register. */
-	while ((USART_ISR(usart) & USART_ISR_TXE) == 0);
-}
-
-/*---------------------------------------------------------------------------*/
-/** @brief USART Wait for Received Data Available
- *
- * Blocks until the receive data buffer holds a valid received data word.
- *
- * @param[in] usart unsigned 32 bit. USART block register address base @ref
- * usart_reg_base
- */
-
-void usart_wait_recv_ready(uint32_t usart)
-{
-	/* Wait until the data is ready to be received. */
-	while ((USART_ISR(usart) & USART_ISR_RXNE) == 0);
-}
-
-/*---------------------------------------------------------------------------*/
 /** @brief USART Read a Status Flag.
  *
  * @param[in] usart unsigned 32 bit. USART block register address base @ref
@@ -300,6 +269,37 @@ void usart_wait_recv_ready(uint32_t usart)
 bool usart_get_flag(uint32_t usart, uint32_t flag)
 {
 	return ((USART_ISR(usart) & flag) != 0);
+}
+
+/*---------------------------------------------------------------------------*/
+/** @brief USART Check for Transmit Data Buffer Empty
+
+Check the transmit data buffer becomes empty and is ready to accept the
+next data word.
+
+@param[in] usart unsigned 32 bit. USART block register address base @ref
+usart_reg_base
+@returns boolean: flag set.
+*/
+
+bool usart_is_send_ready(uint32_t usart)
+{
+    return usart_get_flag(usart, USART_ISR_TXE);
+}
+
+/*---------------------------------------------------------------------------*/
+/** @brief USART Check for Received Data Available
+
+Check the receive data buffer holds a valid received data word.
+
+@param[in] usart unsigned 32 bit. USART block register address base @ref
+usart_reg_base
+@returns boolean: flag set.
+*/
+
+bool usart_is_rxcv_ready(uint32_t usart)
+{
+    return usart_get_flag(usart, USART_ISR_RXNE);
 }
 
 
