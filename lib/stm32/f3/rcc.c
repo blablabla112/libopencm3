@@ -70,10 +70,58 @@ const struct rcc_clock_scale rcc_hsi_configs[] = {
 };
 
 const struct rcc_clock_scale rcc_hse8mhz_configs[] = {
-	{
+	{ /* 72MHz */
 		.pllsrc = RCC_CFGR_PLLSRC_HSE_PREDIV,
-		.pllmul = RCC_CFGR_PLLMUL_MUL9,
 		.plldiv = RCC_CFGR2_PREDIV_NODIV,
+		.pllmul = RCC_CFGR_PLLMUL_MUL9,
+		.usbdiv1 = false,
+		.flash_waitstates = 2,
+		.hpre = RCC_CFGR_HPRE_DIV_NONE,
+		.ppre1 = RCC_CFGR_PPRE1_DIV_2,
+		.ppre2 = RCC_CFGR_PPRE2_DIV_NONE,
+		.ahb_frequency = 72e6,
+		.apb1_frequency = 36e6,
+		.apb2_frequency = 72e6,
+	}
+};
+
+const struct rcc_clock_scale rcc_hse12mhz_configs[] = {
+	{ /* 72MHz */
+		.pllsrc = RCC_CFGR_PLLSRC_HSE_PREDIV,
+		.plldiv = RCC_CFGR2_PREDIV_NODIV,
+		.pllmul = RCC_CFGR_PLLMUL_MUL6,
+		.usbdiv1 = false,
+		.flash_waitstates = 2,
+		.hpre = RCC_CFGR_HPRE_DIV_NONE,
+		.ppre1 = RCC_CFGR_PPRE1_DIV_2,
+		.ppre2 = RCC_CFGR_PPRE2_DIV_NONE,
+		.ahb_frequency = 72e6,
+		.apb1_frequency = 36e6,
+		.apb2_frequency = 72e6,
+	}
+};
+
+const struct rcc_clock_scale rcc_hse16mhz_configs[] = {
+	{ /* 72MHz */
+		.pllsrc = RCC_CFGR_PLLSRC_HSE_PREDIV,
+		.plldiv = RCC_CFGR2_PREDIV_DIV2,
+		.pllmul = RCC_CFGR_PLLMUL_MUL9,
+		.usbdiv1 = false,
+		.flash_waitstates = 2,
+		.hpre = RCC_CFGR_HPRE_DIV_NONE,
+		.ppre1 = RCC_CFGR_PPRE1_DIV_2,
+		.ppre2 = RCC_CFGR_PPRE2_DIV_NONE,
+		.ahb_frequency = 72e6,
+		.apb1_frequency = 36e6,
+		.apb2_frequency = 72e6,
+	}
+};
+
+const struct rcc_clock_scale rcc_hse24mhz_configs[] = {
+	{ /* 72MHz */
+		.pllsrc = RCC_CFGR_PLLSRC_HSE_PREDIV,
+		.plldiv = RCC_CFGR2_PREDIV_DIV3,
+		.pllmul = RCC_CFGR_PLLMUL_MUL9,
 		.usbdiv1 = false,
 		.flash_waitstates = 2,
 		.hpre = RCC_CFGR_HPRE_DIV_NONE,
