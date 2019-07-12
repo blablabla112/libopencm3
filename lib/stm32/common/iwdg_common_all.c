@@ -38,8 +38,8 @@ relevant bit is not set, the IWDG timer must be enabled by software.
 /**@{*/
 
 #include <libopencm3/stm32/iwdg.h>
+#include <libopencm3/stm32/rcc.h>
 
-#define LSI_FREQUENCY 32000
 #define COUNT_LENGTH 12
 #define COUNT_MASK ((1 << COUNT_LENGTH)-1)
 
@@ -101,6 +101,10 @@ void iwdg_set_period_ms(uint32_t period)
 		count = COUNT_MASK;
 		prescale = PRESCALER_MAX;
 	}
+
+    /* enable LSI clock, and wait for ready */
+    rcc_osc_on(RCC_LSI);
+    rcc_wait_for_osc_ready(RCC_LSI);
 
 	while (iwdg_prescaler_busy());
 	IWDG_KR = IWDG_KR_UNLOCK;
